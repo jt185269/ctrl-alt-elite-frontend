@@ -62,6 +62,7 @@ const localiser = momentLocalizer(moment)
         startAccessor="start"
         endAccessor={"end"}
         style={{height: 500}}
+        scrollToTime={new Date()}
         onSelectEvent={(e) => getCurrEvent(e)} //(event) => alert(JSON.stringify(event))
         onSelectSlot={(e) => createNewEvent(e)}
         selectable
