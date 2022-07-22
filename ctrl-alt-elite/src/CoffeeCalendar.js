@@ -3,6 +3,7 @@ import {Calendar, momentLocalizer} from 'react-big-calendar'
 import moment from 'moment'
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import Popup from './Popup'
+import InfoPopup from './InfoPopup'
 
 const localiser = momentLocalizer(moment)
   export const MyCalendar = (props) => {
@@ -17,12 +18,24 @@ const localiser = momentLocalizer(moment)
       setIsOpen(!isOpen)
     }
 
+    const [infoOpen, setInfoOpen] = useState(false)
+    const toggleInfo = () => {
+      setInfoOpen(!infoOpen)
+    }
+
+    
+
     const addEventSlot = (event) => {
       let newEvents = [
         ... events, 
         event
       ]
       setEvents(newEvents)
+    }
+
+    const getCurrEvent = (event) => {
+      setNewEvent(event)
+      toggleInfo()
     }
 
     const createNewEvent = (event) => {
@@ -49,11 +62,12 @@ const localiser = momentLocalizer(moment)
         startAccessor="start"
         endAccessor={"end"}
         style={{height: 500}}
-        onSelectEvent={toggleForm} //(event) => alert(JSON.stringify(event))
+        onSelectEvent={(e) => getCurrEvent(e)} //(event) => alert(JSON.stringify(event))
         onSelectSlot={(e) => createNewEvent(e)}
         selectable
         />
         {isOpen && <Popup handleClose={toggleForm} addEvent={addEventSlot} event={newEvent}/>}
+        {infoOpen && <InfoPopup handleClose={toggleInfo} event={newEvent} />}
       </div>
     
     )

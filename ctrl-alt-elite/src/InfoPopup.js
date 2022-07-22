@@ -2,14 +2,13 @@
 import React, {useState} from "react";
 import {Form, Button, Header} from 'semantic-ui-react';
 
-const Popup = props => {
+const InfoPopup = props => {
   let startObj = props.event.start
   let startStr = startObj.toLocaleTimeString()+ ", " + startObj.toLocaleDateString()
 
   let endObj = props.event.end
   let endStr = endObj.toLocaleTimeString()+ ", " + endObj.toLocaleDateString()
 
-  const [eventTitle, setEventTitle] = useState("")
 
   const handleClose = (e) => {
       if (e.target.id === "outer") {
@@ -17,21 +16,16 @@ const Popup = props => {
       } 
   }
 
-  const handleSubmit = () => {
-    props.event.title=eventTitle
-    props.addEvent(props.event)
-    props.handleClose()
-  }
+
   return (
   <div onClick={handleClose} className="popup-box" id="outer">
     <div className="box" id="inner">
     <Header as={'h2'}>
-        Create new break
+        Info for this break
     </Header>
       <Form>
           <Form.Field>
-            <label>title</label><br/>
-            <input value={eventTitle} onChange={(e) => setEventTitle(e.target.value)} placeholder="coffee break"/>  
+            <label>title: {props.event.title}</label><br/>
           </Form.Field>
           <Form.Field>
             <label>start: {startStr}</label>
@@ -39,11 +33,10 @@ const Popup = props => {
           <Form.Field>
             <label>end: {endStr}</label>
           </Form.Field>
-          <Button onClick={handleSubmit}>OK</Button>
       </Form>
     </div>
   </div>
   );
 };
  
-export default Popup;
+export default InfoPopup;
