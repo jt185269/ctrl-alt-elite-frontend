@@ -18,11 +18,6 @@ function App() {
     }
     console.log(user);
     const res = await fetch('http://localhost:5000/api/login', options)
-    .then((res) => {return res.json()
-    .then((data) => {
-      let dataR = data;
-      console.log(data);
-    })})
     return res.json();
   }
   
@@ -38,7 +33,7 @@ function App() {
       return <p>ERROR!</p>
       
     }
-    if (data.auth) {
+    if (status === 'success' && data.auth) {
       return <p>welcome</p>
     } else {
       return <p>login unsuccessful rip</p>
