@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query'
 import { MyCalendar } from './CoffeeCalendar';
 import { Login } from './Login';
+import { Homepage } from './Homepage';
 const queryClient = new QueryClient()
 
 
@@ -48,7 +49,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {!auth && <Login onAuth={onAuth}/>}
-      {auth && <p>welcome {user.email} <br/> <Auth/></p>}
+      {auth && <p>welcome {user.email} <br/> <Auth/> <Homepage/> </p>}
     </QueryClientProvider>
   );
 }
