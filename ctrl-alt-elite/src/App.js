@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query'
 import { MyCalendar } from './CoffeeCalendar';
+import { Login } from './Login';
 const queryClient = new QueryClient()
 
 
@@ -28,10 +29,17 @@ function Meme() {
 }
 
 function App() {
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(null);
+
+  const onAuth = (user) => {
+    setUser(user)
+    setAuth(true)
+  }
   return (
     <QueryClientProvider client={queryClient}>
-      <MyCalendar/>
-      <Meme/>
+      {!auth && <Login onAuth={onAuth}/>}
+      {auth && <p>welcome {user}</p>}
     </QueryClientProvider>
   );
 }
