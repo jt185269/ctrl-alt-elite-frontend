@@ -10,12 +10,19 @@ const queryClient = new QueryClient()
 function App() {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(null);
-
   async function fetchUser() {
     let options= {
-      user: user
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ Email: user.email, Password: user.password })
     }
-    const res = await fetch('http://localhost:5000/api/login', options);
+    console.log(user);
+    const res = await fetch('http://localhost:5000/api/login', options)
+    .then((res) => {return res.json()
+    .then((data) => {
+      let dataR = data;
+      console.log(data);
+    })})
     return res.json();
   }
   
