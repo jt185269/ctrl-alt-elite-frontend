@@ -6,7 +6,10 @@ export const Login = ({onAuth}) => {
     const [pword, setPword] = useState("")
 
     const onSubmit = () => {
-        onAuth(username)
+        onAuth({
+            email: username,
+            password: pword
+        })
     }
     return (
         <Form className="login">

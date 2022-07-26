@@ -6,30 +6,38 @@ import { Login } from './Login';
 const queryClient = new QueryClient()
 
 
-async function fetchUser() {
-  const res = await fetch('http://localhost:5000/')
-  return res.json();
-}
-
-function Auth() {
-  const {data, status, error} = useQuery(['memes'], fetchUser);
-  console.log(data);
-  if (status === 'loading') {
-    return <p>loading...</p>
-  }
-
-  if (status === 'error') {
-    console.log(error)
-    return <p>ERROR!</p>
-    
-  }
-
-  return {data}
-}
 
 function App() {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(null);
+
+  async function fetchUser() {
+    let options= {
+      user: user
+    }
+    const res = await fetch('http://localhost:5000/api/login', options);
+    return res.json();
+  }
+  
+  function Auth() {
+    const {data, status, error} = useQuery(['memes'], fetchUser);
+    console.log(data);
+    if (status === 'loading') {
+      return <p>loading...</p>
+    }
+  
+    if (status === 'error') {
+      console.log(error)
+      return <p>ERROR!</p>
+      
+    }
+    if (data.auth) {
+      return <p>welcome</p>
+    } else {
+      return <p>login unsuccessful rip</p>
+    }
+    
+  }
 
   const onAuth = (user) => {
     setUser(user)
@@ -38,7 +46,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {!auth && <Login onAuth={onAuth}/>}
-      {auth && <p>welcome {user} <br/> <Auth/></p>}
+      {auth && <p>welcome {user.email} <br/> <Auth/></p>}
     </QueryClientProvider>
   );
 }
