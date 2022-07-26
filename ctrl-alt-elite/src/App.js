@@ -6,13 +6,14 @@ import { Login } from './Login';
 const queryClient = new QueryClient()
 
 
-async function fetchMeme() {
-  const res = await fetch('https://api.imgflip.com/get_memes')
+async function fetchUser() {
+  const res = await fetch('http://localhost:5000/')
   return res.json();
 }
 
-function Meme() {
-  const {data, status, error} = useQuery(['memes'], fetchMeme);
+function Auth() {
+  const {data, status, error} = useQuery(['memes'], fetchUser);
+  console.log(data);
   if (status === 'loading') {
     return <p>loading...</p>
   }
@@ -23,9 +24,7 @@ function Meme() {
     
   }
 
-  const rand = parseInt(Math.random()*100)
-
-  return (<img src={data.data.memes[rand].url}></img>)
+  return {data}
 }
 
 function App() {
@@ -39,7 +38,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {!auth && <Login onAuth={onAuth}/>}
-      {auth && <p>welcome {user}</p>}
+      {auth && <p>welcome {user} <br/> <Auth/></p>}
     </QueryClientProvider>
   );
 }
