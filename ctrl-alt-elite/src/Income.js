@@ -1,4 +1,5 @@
 import {XYPlot, LineSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis, RadialChart} from 'react-vis';
+import moment from 'moment'
 
 const getTotalForYear = (expenses, year) => {
     let total = 0
@@ -11,11 +12,10 @@ const getTotalForYear = (expenses, year) => {
     })
     return total;
 }
-
-
-  export const Expenses = (props) => {
+  
+  export const Income = (props) => {
     let data = JSON.parse(props.data)
-    let expenses = data.Companies[0].Expenses;
+    let expenses = data.Companies[0].Income;
     
     const data1 = [
         {x: 2019, y: 2019103},
@@ -23,8 +23,7 @@ const getTotalForYear = (expenses, year) => {
         {x: 2021, y: 31334},
         {x: 2022, y: 535421}
       ];
-
-    let expenses2022 = expenses.filter( (ex) => {
+      let expenses2022 = expenses.filter( (ex) => {
         return ex.Date === '2022'
     })
 
@@ -35,7 +34,6 @@ const getTotalForYear = (expenses, year) => {
             angle: expense.Value
         })
     })
-    console.log(totalData)
     const years = ['2019', '2020', '2021', '2022']
     let graphData = []
     years.forEach( (year) => {
@@ -48,18 +46,17 @@ const getTotalForYear = (expenses, year) => {
     })
     console.log(graphData)
       return (
-        <><XYPlot className={"expenses"} height={300} width= {500} yDomain={[0,5000000]}>
+        <>
+        <XYPlot className={"expenses"} height={300} width= {500} yDomain={[0,5000000]}>
             <VerticalGridLines />
             <HorizontalGridLines />
             <XAxis tickTotal={4} tickFormat={(d) => d}
                         title='Year'/>
             <YAxis title='Money (£)' tickFormat={(d) => d} tickLabelAngle={-90}/>
-            <LineSeries data={graphData} color={'red'} />
+            <LineSeries data={graphData} color={'green'} />
         </XYPlot>
         <RadialChart showLabels={true} data={totalData} width={300} height={300}/>
-        
         </>
-        
       );
   
   }

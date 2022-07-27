@@ -5,6 +5,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useState } from 'react';
 import {Expenses} from './Expenses'
 import { CoffeeCalendar } from './CoffeeCalendar';
+import { Income } from './Income';
+import { Summary } from './Summary';
 
 async function fetchData() {
 
@@ -24,12 +26,14 @@ async function fetchData() {
 
 export const NavMenu = () => {
   const [page, setPage] = useState(null);
-  const data = fetchData().then( (res) =>
-    console.log(res)
+  const [data, setData] = useState(null)
+  fetchData().then( (res) => {
+    setData(res)
+  }
+    
   );
   
   const onPageChange = (e) => {
-    console.log(e)
     setPage(e)
   }
 
@@ -48,7 +52,9 @@ export const NavMenu = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    {page === "expenses" && <Expenses data={data}/>}
+    {(page === "expenses" && data !== null) && <Expenses data={data}/>}
+    {(page === "income" && data !== null) && <Income data={data} />}
+    {(page === "summary" && data !== null) && <Summary data={data} />}
     {page === "schedule" && <CoffeeCalendar />}
     </>
 
