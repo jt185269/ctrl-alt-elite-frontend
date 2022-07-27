@@ -3,6 +3,8 @@ import { useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query'
 import { MyCalendar } from './CoffeeCalendar';
 import { Login } from './Login';
+import { NavMenu } from './NavMenu'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 const queryClient = new QueryClient()
 
 
@@ -34,7 +36,7 @@ function App() {
       
     }
     if (status === 'success' && data.auth) {
-      return <p>welcome</p>
+      return <p>welcome <NavMenu/></p>
     } else {
       return <p>login unsuccessful rip</p>
     }
