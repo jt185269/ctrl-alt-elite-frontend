@@ -81,3 +81,8 @@
   text-align: center;
   padding-top: 100px;
 }
+
+.expenses {
+  float: left;
+  padding-left: 50px;
+}

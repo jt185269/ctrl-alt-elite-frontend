@@ -5,6 +5,8 @@ import { MyCalendar } from './CoffeeCalendar';
 import { Login } from './Login';
 import { NavMenu } from './NavMenu'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-vis/dist/style.css';
+
 const queryClient = new QueryClient()
 
 
