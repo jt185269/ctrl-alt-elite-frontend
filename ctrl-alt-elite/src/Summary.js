@@ -60,18 +60,21 @@ const getTotalForYear = (expenses, year) => {
             <YAxis title='Money (£)' tickFormat={(d) => d} tickLabelAngle={-90}/>
             <LineSeries data={graphData} />
         </XYPlot>
-        <p style={{'float': 'right', 'padding-right':'100px' }}>
+        <div style={{'float': 'right', 'padding-right':'100px' }}>
+            <p >
             total profit for 2022: £{inGraphData[3].y - exGraphData[3].y}
         </p>
-        <p style={{'float': 'right', 'padding-right':'100px' }}>
+        <p >
             total profit for 2021: £{inGraphData[2].y - exGraphData[2].y}
         </p>
-        <p style={{'float': 'right', 'padding-right':'100px' }}>
+        <p >
             total profit for 2020: £{inGraphData[1].y - exGraphData[1].y}
         </p>
-        <p style={{'float': 'right', 'padding-right':'100px' }}>
+        <p >
             total profit for 2019: £{inGraphData[0].y - exGraphData[0].y}
         </p>
+        </div>
+        
         </>
       );
   

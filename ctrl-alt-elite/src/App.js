@@ -38,7 +38,7 @@ function App() {
       
     }
     if (status === 'success' && data.auth) {
-      return <p>welcome <NavMenu/></p>
+      return <p><NavMenu/></p>
     } else {
       return <p>login unsuccessful rip</p>
     }
@@ -52,7 +52,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {!auth && <Login onAuth={onAuth}/>}
-      {auth && <p>welcome {user.email} <br/> <Auth/></p>}
+      {auth && <div> <h3 className='heading'>Hi {user.email} <br/> <img src='profitpro.png' float={'left'} width={'100px'} height={'100px'}/> Welcome to NCR ProfitPro</h3> <br/> <Auth/></div>}
     </QueryClientProvider>
   );
 }
