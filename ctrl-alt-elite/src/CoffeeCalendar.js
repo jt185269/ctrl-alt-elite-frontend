@@ -6,7 +6,7 @@ import Popup from './Popup'
 import InfoPopup from './InfoPopup'
 
 const localiser = momentLocalizer(moment)
-  export const MyCalendar = (props) => {
+export const CoffeeCalendar = (props) => {
     const [events, setEvents] = useState([{
     }])
 

@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useState } from 'react';
 import {Expenses} from './Expenses'
+import { CoffeeCalendar } from './CoffeeCalendar';
 
 async function fetchData() {
 
@@ -48,6 +49,7 @@ export const NavMenu = () => {
       </Container>
     </Navbar>
     {page === "expenses" && <Expenses data={data}/>}
+    {page === "schedule" && <CoffeeCalendar />}
     </>
 
   );
