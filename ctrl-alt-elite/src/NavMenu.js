@@ -24,9 +24,7 @@ async function fetchData() {
 
 export const NavMenu = () => {
   const [page, setPage] = useState(null);
-  const data = fetchData().then( (res) =>
-    console.log(res)
-  );
+  const data = fetchData()
   
   const onPageChange = (e) => {
     console.log(e)

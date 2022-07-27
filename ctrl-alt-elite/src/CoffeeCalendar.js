@@ -5,8 +5,33 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import Popup from './Popup'
 import InfoPopup from './InfoPopup'
 
+
+async function loadCalendarEvents() {
+
+  let options= {
+
+    method: 'GET',
+
+    headers: { 'Content-Type': 'application/json' },
+
+  }
+
+  const res = await fetch('http://localhost:5000/api/loadcalendar', options)
+
+  return res.json();
+
+}
+
 const localiser = momentLocalizer(moment)
 export const CoffeeCalendar = (props) => {
+  const [data, setData] = useState(null)
+  loadCalendarEvents().then( (res) => {
+    console.log(res)
+    setData(res)
+  })
+  let dataPar = JSON.parse(data);
+  console.log(dataPar)
+
     const [events, setEvents] = useState([{
     }])
 
@@ -23,7 +48,6 @@ export const CoffeeCalendar = (props) => {
       setInfoOpen(!infoOpen)
     }
 
-    
 
     const addEventSlot = (event) => {
       let newEvents = [
@@ -73,3 +97,4 @@ export const CoffeeCalendar = (props) => {
     
     )
   } 
+
