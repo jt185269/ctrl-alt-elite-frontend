@@ -1,5 +1,7 @@
 import { useState } from "react"
-import { Button, Form, Input } from "semantic-ui-react"
+import  Form  from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+
 
 export const Login = ({onAuth}) => {
     const [username, setUsername] = useState("")
@@ -13,14 +15,14 @@ export const Login = ({onAuth}) => {
     }
     return (
         <Form className="login">
-            <Form.Field>
-                <label>Username</label>
-                <Input onChange={(e) => setUsername(e.target.value)} value={username} type="text"/>
-            </Form.Field>
-            <Form.Field>
-            <label>Password</label>
-            <Input onChange={(e) => setPword(e.target.value)} value={pword} type="password"/>
-            </Form.Field>
+            <Form.Group>
+                <Form.Label>Username</Form.Label>
+                <Form.Control  onChange={(e) => setUsername(e.target.value)} value={username} type="text"/>
+            </Form.Group>
+            <Form.Group>
+            <Form.Label>Password</Form.Label>
+            <Form.Control onChange={(e) => setPword(e.target.value)} value={pword} type="password"/>
+            </Form.Group>
             <Button onClick={onSubmit} type='submit'>Log in!</Button>
         </Form>
     )
